@@ -1,5 +1,7 @@
 package Drones;
 
+import java.util.Random;
+
 public class Dron extends EntidadVoladora {
 	private float velocidad;
 	private Misil misil;
@@ -17,7 +19,8 @@ public class Dron extends EntidadVoladora {
 	}
 
 	public void aumentarVelocidad(int porc) {
-		velocidad = velocidad + porc;
+		velocidad = velocidad + (porc * velocidad / 100);
+		misil.aumentarVelocidad(porc);
 	}
 	
 	public int[] getPosicion() {
@@ -28,11 +31,26 @@ public class Dron extends EntidadVoladora {
 		
 	}
 	
-	public int Spawn() {
-		
+	public void Spawn() {
+		Random random = new Random();
+		int numero = random.nextInt(2); // genera 0 o 1
+		if(numero == 0) {
+			posicionX = 0;
+		}
+		else {
+			posicionX = 800;
+		}
 	}
 	
-	public void lanzarMisil(int altitud) {
-		misil.newMisil(posicionX, posicionY, altitud, velocidad);
+	public void lanzarMisil() {
+		misil.newMisil(posicionX, posicionY, velocidad);
 	}
 }
+
+/*
+Dron — enemigo volador. 
+Spawn() lo hace aparecer aleatoriamente a izquierda o derecha. 
+aumentarVelocidad(porc) aumenta su velocidad y la del misil. 
+lanzarMisil() configura el misil con la posición actual. 
+patronDron() define su movimiento.
+*/
