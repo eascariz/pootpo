@@ -3,52 +3,50 @@ package Drones;
 import java.util.Random;
 
 public class Misil extends EntidadVoladora {
-	
+
 	private int altitudDeDetonacion;
 	private int velocidadDeCaida;
-	
+
 	public Misil(int altitudDeDetonacion, int velocidadDeCaida, int posicionX, int posicionY) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.altitudDeDetonacion = altitudDeDetonacion;
 		this.velocidadDeCaida = velocidadDeCaida;
 	}
-	
+
 	@Override
 	public void actualizarPosicion(String dir) {
-		// TODO Auto-generated method stub
+		posicionY = posicionY - velocidadDeCaida;
 	}
 
-	public boolean verificarAltitud(){
-		if(altitudDeDetonacion == posicionY) {
+	public boolean verificarAltitud() {
+		if (altitudDeDetonacion == posicionY) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public void aumentarVelocidad(int porcentaje) {
 		velocidadDeCaida = velocidadDeCaida + (porcentaje * velocidadDeCaida / 100);
 	}
-	
+
 	public int limiteAltMisil() {
 		Random random = new Random();
-		return random.nextInt(1200,4500);
+		return random.nextInt(1200, 4500);
 	}
-	
+
 	public void newMisil(int posX, int posY, int vel) {
 		this.posicionX = posX;
 		this.posicionY = posY;
 		this.altitudDeDetonacion = limiteAltMisil();
 		this.velocidadDeCaida = vel;
 	}
-	
-	public void detonar(int radio) {
-		Explosion explosion = new Explosion(posicionX,posicionY,radio);
+
+	public Explosion detonar(int radio) {
+		return new Explosion(posicionX, posicionY, radio);
 	}
 }
-
 /*
 Misil — proyectil lanzado por el dron.
 

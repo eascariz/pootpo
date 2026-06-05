@@ -9,11 +9,9 @@ public abstract class EntidadVoladora {
 		this.posicionY = posicionY;
 	}
 
-	public abstract void actualizarPosicion(String dir); {
+	public abstract void actualizarPosicion(String dir);
 
 	}
-
-}
 
 /*
 EntidadVoladora — clase abstracta base de todos los objetos que vuelan. No se puede instanciar directamente.

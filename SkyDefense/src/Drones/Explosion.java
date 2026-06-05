@@ -16,11 +16,11 @@ public class Explosion {
 		this.radio = radio;
 	}
 
-	public double calcularDistancia(Avion avion) {
+	public int calcularDistancia(Avion avion) {
 		int[] posicion = avion.obtenerPosicion();
 		int posAvionX = posicion[0];
 		int posAvionY = posicion[1];
-		return Math.sqrt(Math.pow((posAvionX - posicionX), 2) + Math.pow((posAvionY - posicionY), 2));
+		return (int) Math.sqrt(Math.pow((posAvionX - posicionX), 2) + Math.pow((posAvionY - posicionY), 2));
 	}
 	
 	public void mostrar() {

@@ -27,7 +27,7 @@ public class Juego {
 	}
 
 	public void iniciarNivel() {
-		escuadron.gestinarActivos();
+		escuadron.gestionarActivos();
 		escuadron.patronEscuadron();
 	}
 	
@@ -97,7 +97,7 @@ public class Juego {
 	}
 	public void gameOver() {
 		if(vidas == 0) {
-			escuadron.gestinarActivos(); // detiene nuevos spawns
+			escuadron.gestionarActivos(); // detiene nuevos spawns
 			System.out.println("Game Over");
 		}
 	}

@@ -18,12 +18,12 @@ public class Escuadron {
 		this.velocidad = velocidad;
 	}
 
-	public void gestinarActivos() {
+	public void gestionarActivos() {
 		if (contador < 10) {
 			if (cantidadDeEscuadrones() < 4) {
 				for (int i = 0; i < (4 - cantidadDeEscuadrones()); i++) {
 					Dron nuevoDron = new Dron(0, 0, velocidad);
-					nuevoDron.Spawn();
+					nuevoDron.spawn();
 					drones.add(nuevoDron);
 					contador++;
 				}
@@ -49,18 +49,18 @@ public class Escuadron {
 	}
 
 	public boolean verificarRecorrido() {
-		for (int i = 0; i < drones.size(); i++) {
+		for (int i = drones.size() - 1; i >= 0; i--) {
 			int posInicio = drones.get(i).getPosInicioX();
 			int[] pos = drones.get(i).getPosicion();
 			if (posInicio == 800) {
 				if (pos[0] == 0) {
 					drones.remove(i);
-					gestinarActivos();
+					gestionarActivos();
 				}
 			} else if (posInicio == 0) {
 				if (pos[0] == 800) {
 					drones.remove(i);
-					gestinarActivos();
+					gestionarActivos();
 				}
 			}
 		}
@@ -72,7 +72,7 @@ public class Escuadron {
 /*
 Escuadron — agrupa y gestiona los drones de una oleada.
 
-Escuadron(float velocidad) — inicializa con la velocidad de los drones.
+Escuadron(int velocidad) — inicializa con la velocidad de los drones.
 gestinarActivos() — crea nuevos drones si hay menos de 4 activos y el contador no llegó a 10.
 aumentarVelocidad(int porc) — aumenta la velocidad de todos los drones.
 cantidadDeEscuadrones() — retorna cuántos drones hay activos.

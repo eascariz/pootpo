@@ -48,7 +48,7 @@ public class Dron extends EntidadVoladora {
 		}
 	}
 	
-	public void Spawn() {
+	public void spawn() {
 		Random random = new Random();
 		int numero = random.nextInt(2); // genera 0 o 1
 		if(numero == 0) {
