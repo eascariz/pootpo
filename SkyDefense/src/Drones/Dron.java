@@ -1,7 +1,5 @@
 package Drones;
 
-import java.util.Random;
-
 public class Dron extends EntidadVoladora {
 	private int velocidad;
 	private Misil misil;
@@ -12,9 +10,10 @@ public class Dron extends EntidadVoladora {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.velocidad = velocidad;
+		this.posInicioX = posicionX;
 		this.misil = new Misil(0, velocidad, posicionX, posicionY);
 	}
-
+	
 	@Override
 	public void actualizarPosicion(String dir) {
 		// TODO Auto-generated method stub
@@ -45,19 +44,6 @@ public class Dron extends EntidadVoladora {
 		}
 		else if(posInicioX == 800) {
 			actualizarPosicion("izquierda");
-		}
-	}
-	
-	public void spawn() {
-		Random random = new Random();
-		int numero = random.nextInt(2); // genera 0 o 1
-		if(numero == 0) {
-			posInicioX = 0;
-			posicionX = 0;
-		}
-		else {
-			posInicioX = 800;
-			posicionX = 800;
 		}
 	}
 

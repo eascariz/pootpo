@@ -2,6 +2,7 @@ package Drones;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Escuadron {
 	private List<Dron> drones = new ArrayList();
@@ -22,12 +23,22 @@ public class Escuadron {
 		if (contador < 10) {
 			if (cantidadDeEscuadrones() < 4) {
 				for (int i = 0; i < (4 - cantidadDeEscuadrones()); i++) {
-					Dron nuevoDron = new Dron(0, 0, velocidad);
-					nuevoDron.spawn();
+					Dron nuevoDron = new Dron(spawn(), 0, velocidad);
 					drones.add(nuevoDron);
 					contador++;
 				}
 			}
+		}
+	}
+	
+	public int spawn() {
+		Random random = new Random();
+		int numero = random.nextInt(2); // genera 0 o 1
+		if(numero == 0) {
+			return 0;
+		}
+		else {
+			return 800;
 		}
 	}
 
