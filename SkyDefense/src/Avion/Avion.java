@@ -4,7 +4,6 @@ import Drones.EntidadVoladora;
 
 public class Avion extends EntidadVoladora{
 	
-	private int altitud;
 	private int energia;
 	private int movimiento = 2;
 	
@@ -12,7 +11,6 @@ public class Avion extends EntidadVoladora{
 	public Avion(int posicionX, int posicionY) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
-		this.altitud = 1000;
 		this.energia = 100;
 	}
 
@@ -20,13 +18,13 @@ public class Avion extends EntidadVoladora{
 	public void actualizarPosicion(String dir) {
 		// TODO Auto-generated method stub
 		if("arriba".equals(dir)) {
-			if(altitud <= 4998) {
-				altitud = altitud + movimiento;
+			if(posicionY <= 4998) {
+				posicionY = posicionY + movimiento;
 			}
 		}
 		else if("abajo".equals(dir)) {
-			if(altitud > 1002) {
-				altitud = altitud - movimiento;
+			if(posicionY > 1002) {
+				posicionY = posicionY - movimiento;
 			}
 		}
 		else if("izquierda".equals(dir)) {
@@ -38,7 +36,7 @@ public class Avion extends EntidadVoladora{
 	}
 
 	public String desplazar(String dir) {
-		if(1000 <= altitud && altitud <= 5000) {
+		if(1000 <= posicionY && posicionY <= 5000) {
 			actualizarPosicion(dir);
 			return "Confirmado";
 		}
@@ -66,7 +64,7 @@ public class Avion extends EntidadVoladora{
 	
 	public void verificarAltitud(int alt) {
 		if(alt >= 1000 && alt <= 5000) {
-			this.altitud = alt;
+			this.posicionY = alt;
 		}
 	}
 }
