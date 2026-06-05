@@ -1,29 +1,27 @@
 package Puntaje;
 
 public class SistemaPuntaje {
-	
 	private int puntaje;
+	private int umbral = 1000;
 
-	public SistemaPuntaje(int puntaje) {
-		super();
-		this.puntaje = puntaje;
+	public SistemaPuntaje() {
+		this.puntaje = 0;
 	}
-	
+
 	public int getPuntaje() {
 		return puntaje;
 	}
-	
+
 	public boolean verificarPuntaje(int puntaje) {
-		if(puntaje >= 1000) {
+		if(puntaje >= umbral) {
+			umbral += 1000;
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
-	
-	public void sumarPuntos(int punt) {
-		puntaje = puntaje + punt;
+
+	public void sumarPuntos(int puntos) {
+		puntaje += puntos;
 	}
 }
 

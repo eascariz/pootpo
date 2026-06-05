@@ -28,9 +28,10 @@ public class Juego {
 		this.explosion = explosion;
 		this.sistemaPuntaje = sistemaPuntaje;
 	}
-	
+
 	public void iniciarNivel() {
-		
+		escuadron.gestinarActivos();
+		escuadron.patronEscuadron();
 	}
 	
 	public void aumentarVelocidad(int porcentaje) {
@@ -62,15 +63,15 @@ public class Juego {
 			restarVida();
 		}
 	}
-	
+
 	public void pasarNivel() {
-		escuadron.verificarRecorrido();
-		sistemaPuntaje.sumarPuntos(300);
-		sistemaPuntaje.verificarPuntaje(sistemaPuntaje.getPuntaje());
-		nivel = incrementarNivel();
-		aumentarVelocidad(15);
+		if(escuadron.verificarRecorrido()) {
+			sistemaPuntaje.sumarPuntos(300);
+			nivel = incrementarNivel();
+			aumentarVelocidad(15);
+			verificarPuntaje();
+		}
 	}
-	
 	public int incrementarNivel() {
 		return nivel + 1;
 	}

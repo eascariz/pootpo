@@ -7,8 +7,8 @@ public class Escuadron {
 	private List<Dron> drones = new ArrayList();
 	private int velocidad;
 	private int contador = 0;
-	
-	
+
+
 	public Escuadron(int velocidad) {
 		super();
 		this.velocidad = velocidad;
@@ -19,9 +19,9 @@ public class Escuadron {
 	}
 
 	public void gestinarActivos() {
-		if(contador < 10) {
-			if(cantidadDeEscuadrones() < 4) {
-				for(int i = 0; i < (4 - cantidadDeEscuadrones()); i++) {
+		if (contador < 10) {
+			if (cantidadDeEscuadrones() < 4) {
+				for (int i = 0; i < (4 - cantidadDeEscuadrones()); i++) {
 					Dron nuevoDron = new Dron(0, 0, velocidad);
 					nuevoDron.Spawn();
 					drones.add(nuevoDron);
@@ -30,44 +30,44 @@ public class Escuadron {
 			}
 		}
 	}
-	
+
 	public void aumentarVelocidad(int porc) {
 		velocidad = velocidad + (porc * velocidad / 100);
-		for(int i = 0; i < drones.size(); i++) {
+		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).aumentarVelocidad(porc);
 		}
 	}
-	
+
 	public int cantidadDeEscuadrones() {
 		return drones.size();
 	}
-	
+
 	public void patronEscuadron() {
-		for(int i = 0; i < drones.size(); i++) {
+		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).patronDron();
 		}
 	}
-	
-	public void verificarRecorrido() {
-		for(int i = 0; i < drones.size(); i++) {
+
+	public boolean verificarRecorrido() {
+		for (int i = 0; i < drones.size(); i++) {
 			int posInicio = drones.get(i).getPosInicioX();
 			int[] pos = drones.get(i).getPosicion();
-			if(posInicio == 800) {
-				if(pos[0] == 0) {
+			if (posInicio == 800) {
+				if (pos[0] == 0) {
 					drones.remove(i);
 					gestinarActivos();
 				}
-			}
-			else if(posInicio == 0) {
-				if(pos[0] == 800) {
+			} else if (posInicio == 0) {
+				if (pos[0] == 800) {
 					drones.remove(i);
 					gestinarActivos();
 				}
 			}
 		}
+		return drones.isEmpty() && contador >= 10;
 	}
-	
 }
+
 
 /*
 Escuadron — agrupa y gestiona los drones de una oleada.
