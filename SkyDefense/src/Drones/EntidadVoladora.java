@@ -4,6 +4,11 @@ public abstract class EntidadVoladora {
 	protected int posicionX;
 	protected int posicionY;
 
+	@Override
+	public String toString() {
+		return "EntidadVoladora [posicionX=" + posicionX + ", posicionY=" + posicionY + "]";
+	}
+
 	public EntidadVoladora(int posicionX, int posicionY) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;

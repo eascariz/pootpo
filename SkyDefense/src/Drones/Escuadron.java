@@ -9,7 +9,14 @@ public class Escuadron {
 	private int velocidad;
 	private int contador = 0;
 
-
+	public List<Dron> getDrones() {
+		return drones;
+	}
+	
+	public Dron getDron(int indice) {
+	    return drones.get(indice);
+	}
+	
 	public Escuadron(int velocidad) {
 		super();
 		this.velocidad = velocidad;
@@ -21,13 +28,15 @@ public class Escuadron {
 
 	public void gestionarActivos() {
 		if (contador < 10) {
-			if (cantidadDeEscuadrones() < 4) {
-				for (int i = 0; i < (4 - cantidadDeEscuadrones()); i++) {
-					Dron nuevoDron = new Dron(spawn(), 0, velocidad);
-					drones.add(nuevoDron);
-					contador++;
-				}
+			int faltantes = 4 - cantidadDeEscuadrones();
+			
+			for (int i = 0; i < faltantes; i++) {
+				Random random = new Random();
+				Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);
+				drones.add(nuevoDron);
+				contador++;
 			}
+			
 		}
 	}
 	

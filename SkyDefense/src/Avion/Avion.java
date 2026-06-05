@@ -8,12 +8,13 @@ public class Avion extends EntidadVoladora{
 	private int movimiento = 2;
 	
 	
-	public Avion(int posicionX, int posicionY) {
+	public Avion(int posicionX, int posicionY, int movimiento) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.energia = 100;
+		this.movimiento = movimiento;
 	}
-
+	
 	@Override
 	public void actualizarPosicion(String dir) {
 		// TODO Auto-generated method stub
