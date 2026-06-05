@@ -5,9 +5,9 @@ import java.util.Random;
 public class Misil extends EntidadVoladora {
 	
 	private int altitudDeDetonacion;
-	private float velocidadDeCaida;
+	private int velocidadDeCaida;
 	
-	public Misil(int altitudDeDetonacion, float velocidadDeCaida, int posicionX, int posicionY) {
+	public Misil(int altitudDeDetonacion, int velocidadDeCaida, int posicionX, int posicionY) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.altitudDeDetonacion = altitudDeDetonacion;
@@ -37,7 +37,7 @@ public class Misil extends EntidadVoladora {
 		return random.nextInt(1200,4500);
 	}
 	
-	public void newMisil(int posX, int posY, float vel) {
+	public void newMisil(int posX, int posY, int vel) {
 		this.posicionX = posX;
 		this.posicionY = posY;
 		this.altitudDeDetonacion = limiteAltMisil();

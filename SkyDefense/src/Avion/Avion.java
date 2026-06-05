@@ -5,7 +5,7 @@ import Drones.EntidadVoladora;
 public class Avion extends EntidadVoladora{
 	
 	private int altitud;
-	private double energia;
+	private int energia;
 	private int movimiento = 2;
 	
 	

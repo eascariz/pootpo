@@ -12,8 +12,8 @@ public class SistemaPuntaje {
 		return puntaje;
 	}
 
-	public boolean verificarPuntaje(int puntaje) {
-		if(puntaje >= umbral) {
+	public boolean verificarPuntaje(int puntajeActual) {
+		if(puntajeActual >= umbral) {
 			umbral += 1000;
 			return true;
 		}

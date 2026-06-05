@@ -12,6 +12,7 @@ public class Dron extends EntidadVoladora {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.velocidad = velocidad;
+		this.misil = new Misil(0, velocidad, posicionX, posicionY);
 	}
 
 	@Override
@@ -52,9 +53,11 @@ public class Dron extends EntidadVoladora {
 		int numero = random.nextInt(2); // genera 0 o 1
 		if(numero == 0) {
 			posInicioX = 0;
+			posicionX = 0;
 		}
 		else {
 			posInicioX = 800;
+			posicionX = 800;
 		}
 	}
 

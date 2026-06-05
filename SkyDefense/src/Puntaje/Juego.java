@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Avion.Avion;
-import Drones.Dron;
 import Drones.Escuadron;
 import Drones.Explosion;
 
@@ -14,17 +13,15 @@ public class Juego {
 	private int vidas;
 	private Avion avion;
 	private Escuadron escuadron;
-	private Dron dron;
 	private Explosion explosion;
 	private SistemaPuntaje sistemaPuntaje;
 	
-	public Juego(int nivel, int vidas, Avion avion, Escuadron escuadron, Dron dron, Explosion explosion, SistemaPuntaje sistemaPuntaje) {
+	public Juego(int nivel, int vidas, Avion avion, Escuadron escuadron, Explosion explosion, SistemaPuntaje sistemaPuntaje) {
 		super();
 		this.nivel = nivel;
 		this.vidas = vidas;
 		this.avion = avion;
 		this.escuadron = escuadron;
-		this.dron = dron;
 		this.explosion = explosion;
 		this.sistemaPuntaje = sistemaPuntaje;
 	}
@@ -45,10 +42,10 @@ public class Juego {
 	public List<String> generarPatron() {
 		return new ArrayList<>();
 	}
-	
-	
+
+
 	public void calcularDanio() {
-	    double distancia = explosion.calcularDistancia(avion);
+	    int distancia = explosion.calcularDistancia(avion);
 		if(distancia > 150) {
 			sistemaPuntaje.sumarPuntos(40);
 		}
@@ -77,7 +74,7 @@ public class Juego {
 	}
 	
 	public void restarVida() {
-		vidas = vidas - 1;
+		vidas = vidas - 1; gameOver();
 	}
 	
 	public void aumentarVidas() {
@@ -89,12 +86,22 @@ public class Juego {
 			restarVida();
 		}
 	}
-	
+
 	public void verificarPuntaje() {
 		if(sistemaPuntaje.verificarPuntaje(sistemaPuntaje.getPuntaje())) {
-			aumentarVidas();
+			otorgarVidaExtra();
 		}
 	}
+	public void otorgarVidaExtra() {
+		aumentarVidas();
+	}
+	public void gameOver() {
+		if(vidas == 0) {
+			escuadron.gestinarActivos(); // detiene nuevos spawns
+			System.out.println("Game Over");
+		}
+	}
+
 }
 
 /*
