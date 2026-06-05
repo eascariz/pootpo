@@ -1,23 +1,37 @@
 package Drones;
 
+import java.util.Random;
+
 public class Dron extends EntidadVoladora {
-	private float velocidad;
+	private int velocidad;
 	private Misil misil;
+	private int posInicioX;
+	private int frecuenciaDisparo;
 	
-	public Dron(int posicionX, int posicionY, float velocidad, Misil misil) {
+	public Dron(int posicionX, int posicionY, int velocidad) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.velocidad = velocidad;
-		this.misil = misil;
 	}
 
 	@Override
 	public void actualizarPosicion(String dir) {
 		// TODO Auto-generated method stub
+		if("izquierda".equals(dir)) {
+			posicionX = posicionX - velocidad;
+		}
+		else if("derecha".equals(dir)) {
+			posicionX = posicionX + velocidad;
+		}
 	}
-
+	
+	public void aumentarFrecuencia(int porc) {
+		frecuenciaDisparo = frecuenciaDisparo + (porc * frecuenciaDisparo / 100);
+	}
+	
 	public void aumentarVelocidad(int porc) {
-		velocidad = velocidad + porc;
+		velocidad = velocidad + (porc * velocidad / 100);
+		misil.aumentarVelocidad(porc);
 	}
 	
 	public int[] getPosicion() {
@@ -25,14 +39,44 @@ public class Dron extends EntidadVoladora {
 	}
 	
 	public void patronDron() {
-		
+		if(posInicioX == 0) {
+			actualizarPosicion("derecha");
+		}
+		else if(posInicioX == 800) {
+			actualizarPosicion("izquierda");
+		}
 	}
 	
-	public int Spawn() {
-		
+	public void Spawn() {
+		Random random = new Random();
+		int numero = random.nextInt(2); // genera 0 o 1
+		if(numero == 0) {
+			posInicioX = 0;
+		}
+		else {
+			posInicioX = 800;
+		}
 	}
-	
-	public void lanzarMisil(int altitud) {
-		misil.newMisil(posicionX, posicionY, altitud, velocidad);
+
+	public int getPosInicioX() {
+		return posInicioX;
+	}
+
+	public void lanzarMisil() {
+		misil.newMisil(posicionX, posicionY, velocidad);
 	}
 }
+
+/*
+Dron — enemigo volador que atraviesa la pantalla y lanza misiles.
+
+Dron(int posicionX, int posicionY, float velocidad) — inicializa posición y velocidad.
+Spawn() — aparece aleatoriamente en extremo izquierdo o derecho, guarda posInicioX y activa recorrido.
+actualizarPosicion(String dir) — mueve el dron sumando o restando velocidad a posicionX.
+aumentarVelocidad(int porc) — aumenta velocidad del dron y de su misil.
+getPosicion() — retorna [posicionX, posicionY].
+getPosInicioX() — retorna la posición inicial para verificar recorrido.
+patronDron() — mueve el dron hacia la dirección correcta según posInicioX.
+lanzarMisil() — configura y lanza el misil con la posición actual.
+aumentarFrecuencia(int porc) — aumenta la frecuencia de disparo según el porcentaje.
+ */
