@@ -1,11 +1,13 @@
 package Drones;
 
+import java.util.Random;
+
 public class Misil extends EntidadVoladora {
 	
 	private int altitudDeDetonacion;
-	private int velocidadDeCaida;
+	private float velocidadDeCaida;
 	
-	public Misil(int altitudDeDetonacion, int velocidadDeCaida, int posicionX, int posicionY) {
+	public Misil(int altitudDeDetonacion, float velocidadDeCaida, int posicionX, int posicionY) {
 		super(posicionX, posicionY);
 		// TODO Auto-generated constructor stub
 		this.altitudDeDetonacion = altitudDeDetonacion;
@@ -27,18 +29,33 @@ public class Misil extends EntidadVoladora {
 	}
 	
 	public void aumentarVelocidad(int porcentaje) {
-		
+		velocidadDeCaida = velocidadDeCaida + (porcentaje * velocidadDeCaida / 100);
 	}
 	
 	public int limiteAltMisil() {
-		
+		Random random = new Random();
+		return random.nextInt(1200,4500);
 	}
 	
-	public void newMisil(int posX, int posY, int altitud, float vel) {
-		
+	public void newMisil(int posX, int posY, float vel) {
+		this.posicionX = posX;
+		this.posicionY = posY;
+		this.altitudDeDetonacion = limiteAltMisil();
+		this.velocidadDeCaida = vel;
 	}
 	
 	public void detonar(int radio) {
 		Explosion explosion = new Explosion(posicionX,posicionY,radio);
 	}
 }
+
+/*
+Misil — proyectil lanzado por el dron.
+
+Misil(int altitudDeDetonacion, float velocidadDeCaida, int posicionX, int posicionY) — inicializa todos sus atributos.
+verificarAltitud() — retorna true si llegó a la altitud de detonación.
+limiteAltMisil() — genera una altitud aleatoria entre 1200 y 4500.
+newMisil(int posX, int posY, float vel) — reinicia el misil con nuevos valores y genera altitud aleatoria.
+detonar(int radio) — crea una Explosion en la posición actual.
+aumentarVelocidad(int porcentaje) — incrementa la velocidad de caída.
+*/
