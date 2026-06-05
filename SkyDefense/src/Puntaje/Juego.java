@@ -1,5 +1,6 @@
 package Puntaje;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Avion.Avion;
@@ -33,11 +34,7 @@ public class Juego {
 	}
 	
 	public void aumentarVelocidad(int porcentaje) {
-		
-	}
-	
-	public void verificarPuntaje() {
-		
+		escuadron.aumentarVelocidad(porcentaje);
 	}
 	
 	public void desplazar(String direccion) {
@@ -45,17 +42,17 @@ public class Juego {
 	}
 	
 	public List<String> generarPatron() {
-		
+		return new ArrayList<>();
 	}
 	
 	
 	public void calcularDanio() {
-		int[] posicion = avion.obtenerPosicion();
-	    int distancia = explosion.calcularDistancia(avion);
+	    double distancia = explosion.calcularDistancia(avion);
 		if(distancia > 150) {
 			sistemaPuntaje.sumarPuntos(40);
 		}
 		else if(80 < distancia && distancia <= 150) {
+			sistemaPuntaje.sumarPuntos(20);
 			avion.restarEnergia(20);
 		}
 		else if(20 < distancia && distancia <= 80) {
@@ -67,22 +64,51 @@ public class Juego {
 	}
 	
 	public void pasarNivel() {
-		
+		escuadron.verificarRecorrido();
+		sistemaPuntaje.sumarPuntos(300);
+		sistemaPuntaje.verificarPuntaje(sistemaPuntaje.getPuntaje());
+		nivel = incrementarNivel();
+		aumentarVelocidad(15);
 	}
 	
 	public int incrementarNivel() {
-		
-	}
-	
-	public void otorgarVidaExtra() {
-		
+		return nivel + 1;
 	}
 	
 	public void restarVida() {
-		
+		vidas = vidas - 1;
 	}
 	
 	public void aumentarVidas() {
-		
+		vidas = vidas + 1;
+	}
+	
+	public void verificarEnergia() {
+		if(avion.verificarEnergia()) {
+			restarVida();
+		}
+	}
+	
+	public void verificarPuntaje() {
+		if(sistemaPuntaje.verificarPuntaje(sistemaPuntaje.getPuntaje())) {
+			aumentarVidas();
+		}
 	}
 }
+
+/*
+Juego — controlador central del juego.
+
+Juego(...) — inicializa todos los objetos del juego.
+iniciarNivel() — inicia un nuevo nivel.
+aumentarVelocidad(int porcentaje) — aumenta la velocidad del escuadrón.
+desplazar(String direccion) — delega el movimiento al avión.
+generarPatron() — retorna la lista de patrones de movimiento.
+calcularDanio() — aplica daño según la distancia de la explosión al avión.
+pasarNivel() — suma 300 puntos, incrementa el nivel y aumenta velocidades.
+incrementarNivel() — retorna el nivel actual más 1.
+restarVida() — resta una vida al jugador.
+aumentarVidas() — suma una vida al jugador.
+verificarEnergia() — resta una vida si el avión quedó sin energía.
+verificarPuntaje() — otorga una vida extra si el puntaje llegó a 1000.
+*/
