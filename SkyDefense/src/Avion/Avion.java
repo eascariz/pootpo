@@ -5,7 +5,7 @@ import Drones.EntidadVoladora;
 public class Avion extends EntidadVoladora{
 	
 	private int energia;
-	private int movimiento = 2;
+	private int movimiento;
 	
 	
 	public Avion(int posicionX, int posicionY, int movimiento) {
@@ -15,6 +15,10 @@ public class Avion extends EntidadVoladora{
 		this.movimiento = movimiento;
 	}
 	
+	public int getEnergia() {
+		return energia;
+	}
+
 	@Override
 	public void actualizarPosicion(String dir) {
 		// TODO Auto-generated method stub

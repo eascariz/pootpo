@@ -3,11 +3,12 @@ package main;
 import Avion.Avion;
 import Drones.EntidadVoladora;
 import Drones.Escuadron;
+import Puntaje.Juego;
 
 public class Main {
 
 	public static void main(String[] args) {
-
+/*
 		// probar avion
 		Avion avion = new Avion(3,2000,2);
 		System.out.println("AVION");
@@ -44,6 +45,9 @@ public class Main {
 		escuadron.verificarRecorrido();
 		System.out.println(escuadron.getDrones());
 		escuadron.getDron(1).lanzarMisil();
+*/
+		Avion avion = new Avion(300,400,2);
+		Juego juego = new Juego(1,3,avion,);
 		
 
 	}

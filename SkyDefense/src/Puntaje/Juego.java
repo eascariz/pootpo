@@ -25,6 +25,30 @@ public class Juego {
 		this.explosion = explosion;
 		this.sistemaPuntaje = sistemaPuntaje;
 	}
+	
+	public int getNivel() {
+		return nivel;
+	}
+
+	public int getVidas() {
+		return vidas;
+	}
+
+	public Avion getAvion() {
+		return avion;
+	}
+
+	public Escuadron getEscuadron() {
+		return escuadron;
+	}
+
+	public Explosion getExplosion() {
+		return explosion;
+	}
+
+	public SistemaPuntaje getSistemaPuntaje() {
+		return sistemaPuntaje;
+	}
 
 	public void iniciarNivel() {
 		escuadron.gestionarActivos();
@@ -42,7 +66,6 @@ public class Juego {
 	public List<String> generarPatron() {
 		return new ArrayList<>();
 	}
-
 
 	public void calcularDanio() {
 	    int distancia = explosion.calcularDistancia(avion);
