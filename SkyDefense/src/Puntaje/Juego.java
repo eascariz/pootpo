@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Avion.Avion;
+import Comun.Direccion;
 import Drones.Escuadron;
 import Drones.Explosion;
 
@@ -13,16 +14,14 @@ public class Juego {
 	private int vidas;
 	private Avion avion;
 	private Escuadron escuadron;
-	private Explosion explosion;
 	private SistemaPuntaje sistemaPuntaje;
 	
-	public Juego(int nivel, int vidas, Avion avion, Escuadron escuadron, Explosion explosion, SistemaPuntaje sistemaPuntaje) {
+	public Juego(int nivel, int vidas, Avion avion, Escuadron escuadron, SistemaPuntaje sistemaPuntaje) {
 		super();
 		this.nivel = nivel;
 		this.vidas = vidas;
 		this.avion = avion;
 		this.escuadron = escuadron;
-		this.explosion = explosion;
 		this.sistemaPuntaje = sistemaPuntaje;
 	}
 	
@@ -42,10 +41,6 @@ public class Juego {
 		return escuadron;
 	}
 
-	public Explosion getExplosion() {
-		return explosion;
-	}
-
 	public SistemaPuntaje getSistemaPuntaje() {
 		return sistemaPuntaje;
 	}
@@ -59,7 +54,7 @@ public class Juego {
 		escuadron.aumentarVelocidad(porcentaje);
 	}
 	
-	public void desplazar(String direccion) {
+	public void desplazar(Direccion direccion) {
 		avion.desplazar(direccion);
 	}
 	
@@ -67,7 +62,7 @@ public class Juego {
 		return new ArrayList<>();
 	}
 
-	public void calcularDanio() {
+	public void calcularDanio(Explosion explosion) {
 	    int distancia = explosion.calcularDistancia(avion);
 		if(distancia > 150) {
 			sistemaPuntaje.sumarPuntos(40);

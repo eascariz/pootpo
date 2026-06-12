@@ -1,5 +1,7 @@
 package Drones;
 
+import Comun.Direccion;
+
 public abstract class EntidadVoladora {
 	protected int posicionX;
 	protected int posicionY;
@@ -14,7 +16,7 @@ public abstract class EntidadVoladora {
 		this.posicionY = posicionY;
 	}
 
-	public abstract void actualizarPosicion(String dir);
+	public abstract void actualizarPosicion(Direccion dir);
 
 	}
 

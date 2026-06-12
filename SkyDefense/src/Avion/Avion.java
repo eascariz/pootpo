@@ -1,5 +1,6 @@
 package Avion;
 
+import Comun.Direccion;
 import Drones.EntidadVoladora;
 
 public class Avion extends EntidadVoladora{
@@ -20,27 +21,29 @@ public class Avion extends EntidadVoladora{
 	}
 
 	@Override
-	public void actualizarPosicion(String dir) {
+	public void actualizarPosicion(Direccion dir) {
 		// TODO Auto-generated method stub
-		if("arriba".equals(dir)) {
-			if(posicionY <= 4998) {
-				posicionY = posicionY + movimiento;
-			}
-		}
-		else if("abajo".equals(dir)) {
-			if(posicionY > 1002) {
-				posicionY = posicionY - movimiento;
-			}
-		}
-		else if("izquierda".equals(dir)) {
-			posicionX = posicionX - movimiento;
-		}
-		else if("derecha".equals(dir)) {
-			posicionX = posicionX + movimiento;
+		switch(dir) {
+			case ARRIBA:
+				if(posicionY <= 4998) {
+					posicionY = posicionY + movimiento;
+				}
+				break;
+			case ABAJO:
+				if(posicionY > 1002) {
+					posicionY = posicionY - movimiento;
+				}
+				break;
+			case IZQUIERDA:
+				posicionX = posicionX - movimiento;
+				break;
+			case DERECHA:
+				posicionX = posicionX + movimiento;
+				break;
 		}
 	}
 
-	public String desplazar(String dir) {
+	public String desplazar(Direccion dir) {
 		if(1000 <= posicionY && posicionY <= 5000) {
 			actualizarPosicion(dir);
 			return "Confirmado";
@@ -72,6 +75,7 @@ public class Avion extends EntidadVoladora{
 			this.posicionY = alt;
 		}
 	}
+
 }
 
 

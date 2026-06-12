@@ -1,8 +1,9 @@
 package Drones;
 
+import Comun.Direccion;
+
 public class Dron extends EntidadVoladora {
 	private int velocidad;
-	private Misil misil;
 	private int posInicioX;
 	private int frecuenciaDisparo;
 	
@@ -11,17 +12,18 @@ public class Dron extends EntidadVoladora {
 		// TODO Auto-generated constructor stub
 		this.velocidad = velocidad;
 		this.posInicioX = posicionX;
-		this.misil = new Misil(0, velocidad, posicionX, posicionY);
 	}
 	
 	@Override
-	public void actualizarPosicion(String dir) {
+	public void actualizarPosicion(Direccion dir) {
 		// TODO Auto-generated method stub
-		if("izquierda".equals(dir)) {
+		switch(dir) {
+		case IZQUIERDA:
 			posicionX = posicionX - velocidad;
-		}
-		else if("derecha".equals(dir)) {
+			break;
+		case DERECHA:
 			posicionX = posicionX + velocidad;
+			break;
 		}
 	}
 	
@@ -31,7 +33,6 @@ public class Dron extends EntidadVoladora {
 	
 	public void aumentarVelocidad(int porc) {
 		velocidad = velocidad + (porc * velocidad / 100);
-		misil.aumentarVelocidad(porc);
 	}
 	
 	public int[] getPosicion() {
@@ -40,10 +41,10 @@ public class Dron extends EntidadVoladora {
 	
 	public void patronDron() {
 		if(posInicioX == 0) {
-			actualizarPosicion("derecha");
+			actualizarPosicion(Direccion.DERECHA);
 		}
 		else if(posInicioX == 800) {
-			actualizarPosicion("izquierda");
+			actualizarPosicion(Direccion.IZQUIERDA);
 		}
 	}
 
@@ -51,9 +52,10 @@ public class Dron extends EntidadVoladora {
 		return posInicioX;
 	}
 
-	public void lanzarMisil() {
-		misil.newMisil(posicionX, posicionY, velocidad);
+	public Misil lanzarMisil() {
+		return new Misil(0,velocidad,posicionX, posicionY);
 	}
+
 }
 
 /*

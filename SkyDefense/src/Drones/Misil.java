@@ -2,6 +2,8 @@ package Drones;
 
 import java.util.Random;
 
+import Comun.Direccion;
+
 public class Misil extends EntidadVoladora {
 
 	private int altitudDeDetonacion;
@@ -15,7 +17,7 @@ public class Misil extends EntidadVoladora {
 	}
 
 	@Override
-	public void actualizarPosicion(String dir) {
+	public void actualizarPosicion(Direccion dir) {
 		posicionY = posicionY - velocidadDeCaida;
 	}
 

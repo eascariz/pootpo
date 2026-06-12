@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Escuadron {
 	private List<Dron> drones = new ArrayList();
+	private List<Misil> misiles = new ArrayList<>();
 	private int velocidad;
 	private int contador = 0;
 
@@ -21,7 +22,7 @@ public class Escuadron {
 		super();
 		this.velocidad = velocidad;
 	}
-
+	
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
@@ -29,7 +30,6 @@ public class Escuadron {
 	public void gestionarActivos() {
 		if (contador < 10) {
 			int faltantes = 4 - cantidadDeEscuadrones();
-			
 			for (int i = 0; i < faltantes; i++) {
 				Random random = new Random();
 				Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);
@@ -56,6 +56,9 @@ public class Escuadron {
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).aumentarVelocidad(porc);
 		}
+		for (int i = 0; i < misiles.size(); i++) {
+			misiles.get(i).aumentarVelocidad(porc);
+		}
 	}
 
 	public int cantidadDeEscuadrones() {
@@ -65,6 +68,8 @@ public class Escuadron {
 	public void patronEscuadron() {
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).patronDron();
+			misiles.add(drones.get(i).lanzarMisil());
+			
 		}
 	}
 
