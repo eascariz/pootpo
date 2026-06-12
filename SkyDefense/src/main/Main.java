@@ -1,55 +1,62 @@
 package main;
 
 import Avion.Avion;
-import Drones.EntidadVoladora;
+import Comun.Direccion;
 import Drones.Escuadron;
+import Drones.Misil;
+import Drones.Explosion;
 import Puntaje.Juego;
+import Puntaje.SistemaPuntaje;
 
 public class Main {
 
 	public static void main(String[] args) {
-/*
-		// probar avion
-		Avion avion = new Avion(3,2000,2);
-		System.out.println("AVION");
-		System.out.println(avion.toString());
-		System.out.println("giro a la izquierda");
-		avion.actualizarPosicion("izquierda");
-		System.out.println(avion.toString());
-		System.out.println("giro a la derecha");
-		avion.actualizarPosicion("derecha");
-		System.out.println(avion.toString());
-		System.out.println("subio");
-		avion.actualizarPosicion("arriba");
-		System.out.println(avion.toString());
-		System.out.println("bajo");
-		avion.actualizarPosicion("abajo");
-		System.out.println(avion.toString());
-		System.out.println("ESCUADRO");
-		
-		// probar escuadron y drones
+		Avion avion = new Avion(300, 1500, 2);
 		Escuadron escuadron = new Escuadron(800);
-		escuadron.gestionarActivos();
-		System.out.println(escuadron.getDrones());
-		for(int i = 0; i < escuadron.getDrones().size(); i++) {
-			System.out.println(i);
-		}
-		if(escuadron.getDron(1).getPosInicioX() == 0) {
-			escuadron.getDron(1).actualizarPosicion("derecha");
-		}
-		else {
-			escuadron.getDron(1).actualizarPosicion("izquierda");
-		}
-		System.out.println("El dron 2 termino su recorrido");
-		System.out.println("se elimino uno");
-		escuadron.verificarRecorrido();
-		System.out.println(escuadron.getDrones());
-		escuadron.getDron(1).lanzarMisil();
-*/
-		Avion avion = new Avion(300,400,2);
-		Juego juego = new Juego(1,3,avion,);
-		
+		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
+		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
 
+		System.out.println("=== INICIO DEL JUEGO ===");
+		System.out.println("Nivel: " + juego.getNivel());
+		System.out.println("Vidas: " + juego.getVidas());
+
+		System.out.println("\n=== INICIAR NIVEL ===");
+		juego.iniciarNivel();
+		System.out.println("Drones activos: " + escuadron.cantidadDeEscuadrones());
+
+		System.out.println("\n=== MOVIMIENTO DE AVION ===");
+		System.out.println("Posicion inicial: " + avion.toString());
+		juego.desplazar(Direccion.DERECHA);
+		System.out.println("Después de mover derecha: " + avion.toString());
+		juego.desplazar(Direccion.ARRIBA);
+		System.out.println("Después de subir: " + avion.toString());
+
+		System.out.println("\n=== LANZAMIENTO DE MISIL ===");
+		Misil misil = escuadron.getDron(0).lanzarMisil();
+		System.out.println("Misil creado: " + misil.toString());
+
+		System.out.println("\n=== CAIDA DEL MISIL ===");
+		for(int i = 0; i < 5; i++) {
+			misil.actualizarPosicion(null);
+			System.out.println("Posicion misil: " + misil.toString());
+		}
+
+		System.out.println("\n=== DETONACION ===");
+		Explosion explosion = misil.detonar(50);
+		System.out.println("Explosion creada en posicion del misil");
+		juego.calcularDanio(explosion);
+		System.out.println("Energia avion: " + avion.getEnergia());
+		System.out.println("Vidas: " + juego.getVidas());
+		System.out.println("Puntaje: " + sistemaPuntaje.getPuntaje());
+
+		System.out.println("\n=== PASAR NIVEL ===");
+		for(int i = 0; i < 10; i++) {
+			escuadron.gestionarActivos();
+		}
+		escuadron.getDrones().clear();
+		juego.pasarNivel();
+		System.out.println("Nivel actual: " + juego.getNivel());
+		System.out.println("Puntaje: " + sistemaPuntaje.getPuntaje());
+		System.out.println("Vidas: " + juego.getVidas());
 	}
-
 }

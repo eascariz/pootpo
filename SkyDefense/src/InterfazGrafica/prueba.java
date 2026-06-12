@@ -1,22 +1,23 @@
 package InterfazGrafica;
 
-import java.awt.Component;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Avion.Avion;
+import Drones.Escuadron;
 import Puntaje.Juego;
+import Puntaje.SistemaPuntaje;
 
 public class prueba {
-	private static Juego juego;
-	
-	public static void setJuego(Juego juego) {
-		prueba.juego = juego;
-	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Avion avion = new Avion(300, 400, 2);
+		Escuadron escuadron = new Escuadron(800);
+		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
+		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
+
 		JPanel panelInfo = new JPanel();
 		int[] pos = juego.getAvion().obtenerPosicion();
 		String posX = String.valueOf(pos[0]);
@@ -38,7 +39,5 @@ public class prueba {
 		panelInfo.add(new JLabel(puntaje));
 		panelInfo.add(new JLabel("Nivel:"));
 		panelInfo.add(new JLabel(nivel));
-		
 	}
-
 }

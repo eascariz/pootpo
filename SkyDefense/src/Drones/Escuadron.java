@@ -13,40 +13,45 @@ public class Escuadron {
 	public List<Dron> getDrones() {
 		return drones;
 	}
-	
+
 	public Dron getDron(int indice) {
-	    return drones.get(indice);
+		return drones.get(indice);
 	}
-	
+
 	public Escuadron(int velocidad) {
 		super();
 		this.velocidad = velocidad;
 	}
-	
+
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
 
 	public void gestionarActivos() {
 		if (contador < 10) {
-			int faltantes = 4 - cantidadDeEscuadrones();
-			for (int i = 0; i < faltantes; i++) {
+			int espacioDisponible = 4 - cantidadDeEscuadrones();
+			int restantes = 10 - contador;
+			int maximoPosible = Math.min(espacioDisponible, restantes);
+
+			if(maximoPosible > 0) {
 				Random random = new Random();
-				Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);
-				drones.add(nuevoDron);
-				contador++;
+				int cantidad = random.nextInt(maximoPosible) + 1; // entre 1 y maximoPosible
+
+				for (int i = 0; i < cantidad; i++) {
+					Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);
+					drones.add(nuevoDron);
+					contador++;
+				}
 			}
-			
 		}
 	}
-	
+
 	public int spawn() {
 		Random random = new Random();
 		int numero = random.nextInt(2); // genera 0 o 1
-		if(numero == 0) {
+		if (numero == 0) {
 			return 0;
-		}
-		else {
+		} else {
 			return 800;
 		}
 	}
@@ -69,7 +74,6 @@ public class Escuadron {
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).patronDron();
 			misiles.add(drones.get(i).lanzarMisil());
-			
 		}
 	}
 
@@ -91,9 +95,8 @@ public class Escuadron {
 		}
 		return drones.isEmpty() && contador >= 10;
 	}
+
 }
-
-
 /*
 Escuadron — agrupa y gestiona los drones de una oleada.
 
