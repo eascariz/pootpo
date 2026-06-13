@@ -35,7 +35,7 @@ public class Escuadron {
 
 			if(maximoPosible > 0) {
 				Random random = new Random();
-				int cantidad = random.nextInt(maximoPosible) + 1; // entre 1 y maximoPosible
+				int cantidad = random.nextInt(maximoPosible) + 1;
 
 				for (int i = 0; i < cantidad; i++) {
 					Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);

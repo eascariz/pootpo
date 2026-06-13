@@ -52,8 +52,10 @@ public class Main {
 		System.out.println("\n=== PASAR NIVEL ===");
 		for(int i = 0; i < 10; i++) {
 			escuadron.gestionarActivos();
+			System.out.println("Iteracion " + i + " - drones: " + escuadron.cantidadDeEscuadrones());
 		}
 		escuadron.getDrones().clear();
+		System.out.println("Verificar recorrido: " + escuadron.verificarRecorrido());
 		juego.pasarNivel();
 		System.out.println("Nivel actual: " + juego.getNivel());
 		System.out.println("Puntaje: " + sistemaPuntaje.getPuntaje());
