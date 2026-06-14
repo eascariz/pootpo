@@ -2,6 +2,8 @@ package InterfazGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Avion.Avion;
+import Comun.Direccion;
 import Drones.Escuadron;
 import Puntaje.Juego;
 import Puntaje.SistemaPuntaje;
@@ -16,11 +19,11 @@ import Puntaje.SistemaPuntaje;
 public class prueba {
 
 	public static void main(String[] args) {
-		Avion avion = new Avion(300, 400, 2);
+		Avion avion = new Avion(300, 1500, 2);
 		Escuadron escuadron = new Escuadron(800);
 		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
 		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
-
+		
 		JPanel panelInfo = new JPanel();
 		int[] pos = juego.getAvion().obtenerPosicion();
 		String posX = String.valueOf(pos[0]);
@@ -32,8 +35,11 @@ public class prueba {
 		panelInfo.setLayout(new GridLayout(6, 2));
 		panelInfo.add(new JLabel("Posición X:"));
 		panelInfo.add(new JLabel(posX));
+		
+		JLabel lblPosY = new JLabel(posY);
+		JLabel lblPosX = new JLabel(posX);
 		panelInfo.add(new JLabel("Posición Y:"));
-		panelInfo.add(new JLabel(posY));
+		panelInfo.add(lblPosY);
 		panelInfo.add(new JLabel("Energia:"));
 		panelInfo.add(new JLabel(energia));
 		panelInfo.add(new JLabel("Vidas:"));
@@ -59,15 +65,22 @@ public class prueba {
 		der.setText("➡️");
 		arriba.setText("⬆️");
 		abajo.setText("⬇️");
-		panelControl.add(new JLabel());        
-		panelControl.add(arriba);              
+		panelControl.add(new JLabel());
+		panelControl.add(arriba);  
+		arriba.addActionListener(new Movimiento(lblPosY, juego, Direccion.ARRIBA));
 		panelControl.add(new JLabel());       
 		panelControl.add(izq);                 
+		izq.addActionListener(new Movimiento(lblPosX, juego, Direccion.IZQUIERDA));
 		panelControl.add(new JLabel());        
-		panelControl.add(der);                 
+		panelControl.add(der);    
+		der.addActionListener(new Movimiento(lblPosX, juego, Direccion.DERECHA));
 		panelControl.add(new JLabel());        
 		panelControl.add(abajo);              
-		panelControl.add(new JLabel());        
+		abajo.addActionListener(new Movimiento(lblPosY, juego, Direccion.ABAJO));
+		panelControl.add(new JLabel());       
+		
+		//acciones de los botones
+		
 		/*
 		panelControl.add(izq,BorderLayout.WEST);
 		panelControl.add(der,BorderLayout.EAST);
