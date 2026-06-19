@@ -53,7 +53,7 @@ public class Dron extends EntidadVoladora {
 	}
 
 	public Misil lanzarMisil() {
-		return new Misil(0,velocidad,posicionX, posicionY);
+		return new Misil(velocidad,posicionX, posicionY);
 	}
 
 }

@@ -47,7 +47,6 @@ public class Juego {
 
 	public void iniciarNivel() {
 		escuadron.gestionarActivos();
-		escuadron.patronEscuadron();
 	}
 	
 	public void aumentarVelocidad(int porcentaje) {

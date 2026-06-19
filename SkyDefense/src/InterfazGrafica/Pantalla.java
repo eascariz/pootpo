@@ -16,11 +16,11 @@ import Drones.Escuadron;
 import Puntaje.Juego;
 import Puntaje.SistemaPuntaje;
 
-public class prueba {
+public class Pantalla {
 
 	public static void main(String[] args) {
 		Avion avion = new Avion(300, 1500, 2);
-		Escuadron escuadron = new Escuadron(800);
+		Escuadron escuadron = new Escuadron(100);
 		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
 		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
 		
@@ -33,25 +33,28 @@ public class prueba {
 		String puntaje = String.valueOf(juego.getSistemaPuntaje().getPuntaje());
 		String nivel = String.valueOf(juego.getNivel());
 		panelInfo.setLayout(new GridLayout(6, 2));
-		panelInfo.add(new JLabel("Posición X:"));
-		panelInfo.add(new JLabel(posX));
 		
 		JLabel lblPosY = new JLabel(posY);
 		JLabel lblPosX = new JLabel(posX);
+		JLabel lblEnergia = new JLabel(energia);
+		JLabel lblVidas = new JLabel(vidas);
+		JLabel lblPuntaje = new JLabel(puntaje);
+		JLabel lblNivel = new JLabel(nivel);
+		panelInfo.add(new JLabel("Posición X:"));
+		panelInfo.add(lblPosX);
 		panelInfo.add(new JLabel("Posición Y:"));
 		panelInfo.add(lblPosY);
 		panelInfo.add(new JLabel("Energia:"));
-		panelInfo.add(new JLabel(energia));
+		panelInfo.add(lblEnergia);
 		panelInfo.add(new JLabel("Vidas:"));
-		panelInfo.add(new JLabel(vidas));
+		panelInfo.add(lblVidas);
 		panelInfo.add(new JLabel("Puntaje:"));
-		panelInfo.add(new JLabel(puntaje));
+		panelInfo.add(lblPuntaje);
 		panelInfo.add(new JLabel("Nivel:"));
-		panelInfo.add(new JLabel(nivel));
+		panelInfo.add(lblNivel);
 		JPanel panelContenedorInfo = new JPanel();
 		panelContenedorInfo.setLayout(new BorderLayout());
 		panelContenedorInfo.add(panelInfo, BorderLayout.WEST);
-
 		
 		
 		// botones de control
@@ -77,7 +80,7 @@ public class prueba {
 		panelControl.add(new JLabel());        
 		panelControl.add(abajo);              
 		abajo.addActionListener(new Movimiento(lblPosY, juego, Direccion.ABAJO));
-		panelControl.add(new JLabel());       
+		panelControl.add(new JLabel());  
 		
 		//acciones de los botones
 		
@@ -98,5 +101,9 @@ public class prueba {
 		pantalla.setSize(600,400);
         pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pantalla.setVisible(true);
+        
+        juego.iniciarNivel();
+        new CicloJuego(lblEnergia,lblVidas,lblPuntaje,juego,escuadron);
+        
 	}
 }

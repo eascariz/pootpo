@@ -1,6 +1,7 @@
 package Drones;
 
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import Comun.Direccion;
 
@@ -9,10 +10,11 @@ public class Misil extends EntidadVoladora {
 	private int altitudDeDetonacion;
 	private int velocidadDeCaida;
 
-	public Misil(int altitudDeDetonacion, int velocidadDeCaida, int posicionX, int posicionY) {
+	public Misil(int velocidadDeCaida, int posicionX, int posicionY) {
 		super(posicionX, posicionY);
+		Random random = new Random();
 		// TODO Auto-generated constructor stub
-		this.altitudDeDetonacion = altitudDeDetonacion;
+		this.altitudDeDetonacion = random.nextInt(1200,4500);
 		this.velocidadDeCaida = velocidadDeCaida;
 	}
 
@@ -22,7 +24,7 @@ public class Misil extends EntidadVoladora {
 	}
 
 	public boolean verificarAltitud() {
-		if (altitudDeDetonacion == posicionY) {
+		if (altitudDeDetonacion >= posicionY) {
 			return true;
 		} else {
 			return false;

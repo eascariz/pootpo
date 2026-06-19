@@ -14,6 +14,10 @@ public class Escuadron {
 		return drones;
 	}
 
+	public List<Misil> getMisiles() {
+		return misiles;
+	}
+
 	public Dron getDron(int indice) {
 		return drones.get(indice);
 	}
