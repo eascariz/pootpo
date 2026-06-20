@@ -2,8 +2,6 @@ package InterfazGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +21,7 @@ public class Pantalla {
 		Escuadron escuadron = new Escuadron(100);
 		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
 		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
-		
+
 		JPanel panelInfo = new JPanel();
 		int[] pos = juego.getAvion().obtenerPosicion();
 		String posX = String.valueOf(pos[0]);
@@ -33,7 +31,7 @@ public class Pantalla {
 		String puntaje = String.valueOf(juego.getSistemaPuntaje().getPuntaje());
 		String nivel = String.valueOf(juego.getNivel());
 		panelInfo.setLayout(new GridLayout(6, 2));
-		
+
 		JLabel lblPosY = new JLabel(posY);
 		JLabel lblPosX = new JLabel(posX);
 		JLabel lblEnergia = new JLabel(energia);
@@ -55,8 +53,10 @@ public class Pantalla {
 		JPanel panelContenedorInfo = new JPanel();
 		panelContenedorInfo.setLayout(new BorderLayout());
 		panelContenedorInfo.add(panelInfo, BorderLayout.WEST);
-		
-		
+
+		// panel de juego (visual)
+		PanelJuego panelJuego = new PanelJuego(avion, escuadron);
+
 		// botones de control
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new GridLayout(3,3));
@@ -69,21 +69,44 @@ public class Pantalla {
 		arriba.setText("⬆️");
 		abajo.setText("⬇️");
 		panelControl.add(new JLabel());
-		panelControl.add(arriba);  
+		panelControl.add(arriba);
 		arriba.addActionListener(new Movimiento(lblPosY, juego, Direccion.ARRIBA));
-		panelControl.add(new JLabel());       
-		panelControl.add(izq);                 
+		panelControl.add(new JLabel());
+		panelControl.add(izq);
 		izq.addActionListener(new Movimiento(lblPosX, juego, Direccion.IZQUIERDA));
-		panelControl.add(new JLabel());        
-		panelControl.add(der);    
+		panelControl.add(new JLabel());
+		panelControl.add(der);
 		der.addActionListener(new Movimiento(lblPosX, juego, Direccion.DERECHA));
-		panelControl.add(new JLabel());        
-		panelControl.add(abajo);              
+		panelControl.add(new JLabel());
+		panelControl.add(abajo);
 		abajo.addActionListener(new Movimiento(lblPosY, juego, Direccion.ABAJO));
-		panelControl.add(new JLabel());  
-		
-		//acciones de los botones
-		
+		panelControl.add(new JLabel());
+
+		JFrame pantalla = new JFrame("SkyDefence");
+		pantalla.add(panelContenedorInfo, BorderLayout.NORTH);
+		pantalla.add(panelJuego, BorderLayout.CENTER);
+		pantalla.add(panelControl, BorderLayout.SOUTH);
+		pantalla.pack();
+		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pantalla.setVisible(true);
+
+		juego.iniciarNivel();
+		new CicloJuego(lblEnergia, lblVidas, lblPuntaje, juego, escuadron, panelJuego);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 		/*
 		panelControl.add(izq,BorderLayout.WEST);
 		panelControl.add(der,BorderLayout.EAST);
@@ -93,17 +116,3 @@ public class Pantalla {
 		panelContenedorControl.setLayout(new GridLayout(3,3));
 		panelContenedorControl.add(panelControl,GridLayout().CENTER);
 		*/
-		
-		// titulo
-		JFrame pantalla = new JFrame("SkyDefence");
-		pantalla.add(panelContenedorInfo,BorderLayout.NORTH);
-		pantalla.add(panelControl,BorderLayout.SOUTH);
-		pantalla.setSize(600,400);
-        pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pantalla.setVisible(true);
-        
-        juego.iniciarNivel();
-        new CicloJuego(lblEnergia,lblVidas,lblPuntaje,juego,escuadron);
-        
-	}
-}

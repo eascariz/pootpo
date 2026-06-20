@@ -84,6 +84,7 @@ public class Juego {
 			nivel = incrementarNivel();
 			aumentarVelocidad(15);
 			verificarPuntaje();
+			iniciarNivel();
 		}
 	}
 	public int incrementarNivel() {

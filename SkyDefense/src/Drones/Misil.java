@@ -18,6 +18,11 @@ public class Misil extends EntidadVoladora {
 		this.velocidadDeCaida = velocidadDeCaida;
 	}
 
+
+	public int[] getPosicion() {
+		return new int[] {posicionX, posicionY};
+	}
+
 	@Override
 	public void actualizarPosicion(Direccion dir) {
 		posicionY = posicionY - velocidadDeCaida;

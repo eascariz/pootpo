@@ -59,6 +59,9 @@ public class Escuadron {
 			return 800;
 		}
 	}
+	public int getContador() {
+		return contador;
+	}
 
 	public void aumentarVelocidad(int porc) {
 		velocidad = velocidad + (porc * velocidad / 100);
@@ -77,7 +80,9 @@ public class Escuadron {
 	public void patronEscuadron() {
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).patronDron();
-			misiles.add(drones.get(i).lanzarMisil());
+			if(drones.get(i).debeDisparar()) {
+				misiles.add(drones.get(i).lanzarMisil());
+			}
 		}
 	}
 
@@ -88,14 +93,15 @@ public class Escuadron {
 			if (posInicio == 800) {
 				if (pos[0] == 0) {
 					drones.remove(i);
-					gestionarActivos();
 				}
 			} else if (posInicio == 0) {
 				if (pos[0] == 800) {
 					drones.remove(i);
-					gestionarActivos();
 				}
 			}
+		}
+		if(contador < 10) {
+			gestionarActivos();
 		}
 		return drones.isEmpty() && contador >= 10;
 	}
