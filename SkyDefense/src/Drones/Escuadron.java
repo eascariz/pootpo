@@ -50,6 +50,12 @@ public class Escuadron {
 		}
 	}
 
+	public void reiniciar() {
+		drones.clear();
+		misiles.clear();
+		contador = 0;
+	}
+
 	public int spawn() {
 		Random random = new Random();
 		int numero = random.nextInt(2); // genera 0 o 1

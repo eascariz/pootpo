@@ -53,5 +53,6 @@ public class CicloJuego implements ActionListener {
 		energia.setText(String.valueOf(juego.getAvion().getEnergia()));
 
 		System.out.println("Drones activos: " + escuadron.cantidadDeEscuadrones() + " - Contador: " + escuadron.getContador());
+		panelJuego.repaint();
 	}
 }

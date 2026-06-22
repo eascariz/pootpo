@@ -84,6 +84,7 @@ public class Juego {
 			nivel = incrementarNivel();
 			aumentarVelocidad(15);
 			verificarPuntaje();
+			escuadron.reiniciar();
 			iniciarNivel();
 		}
 	}
