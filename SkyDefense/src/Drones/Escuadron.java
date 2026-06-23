@@ -97,11 +97,11 @@ public class Escuadron {
 			int posInicio = drones.get(i).getPosInicioX();
 			int[] pos = drones.get(i).getPosicion();
 			if (posInicio == 800) {
-				if (pos[0] == 0) {
+				if (pos[0] <= 0) {  // <= en vez de ==
 					drones.remove(i);
 				}
 			} else if (posInicio == 0) {
-				if (pos[0] == 800) {
+				if (pos[0] >= 800) {  // >= en vez de ==
 					drones.remove(i);
 				}
 			}

@@ -14,7 +14,7 @@ import Drones.Escuadron;
 import Puntaje.Juego;
 import Puntaje.SistemaPuntaje;
 
-public class Pantalla {
+public class 	Pantalla {
 
 	public static void main(String[] args) {
 		Avion avion = new Avion(300, 1500, 2);
