@@ -65,9 +65,15 @@ public class Avion extends EntidadVoladora{
 			return false;
 		}
 	}
-	
+
 	public void restarEnergia(int porcentaje) {
-		energia = (energia - (energia * porcentaje / 100));
+		energia = energia - porcentaje;
+		if(energia < 0) {
+			energia = 0;
+		}
+	}
+	public void resetearEnergia() {
+		this.energia = 100;
 	}
 	
 	public void verificarAltitud(int alt) {

@@ -62,24 +62,29 @@ public class Juego {
 	}
 
 	public void calcularDanio(Explosion explosion) {
-	    int distancia = explosion.calcularDistancia(avion);
+		int distancia = explosion.calcularDistancia(avion);
+		System.out.println("Distancia: " + distancia);
 		if(distancia > 150) {
 			sistemaPuntaje.sumarPuntos(40);
 		}
-		else if(80 < distancia && distancia <= 150) {
+		else if(distancia > 80 && distancia <= 150) {
 			sistemaPuntaje.sumarPuntos(20);
 			avion.restarEnergia(20);
+			verificarEnergia();
 		}
-		else if(20 < distancia && distancia <= 80) {
+		else if(distancia > 20 && distancia <= 80) {
 			avion.restarEnergia(40);
+			verificarEnergia();
 		}
-		else if(20 > distancia) {
+		else if(distancia <= 20) {
 			restarVida();
 		}
 	}
 
 	public void pasarNivel() {
-		if(escuadron.verificarRecorrido()) {
+		boolean recorrido = escuadron.verificarRecorrido();
+		System.out.println("verificarRecorrido: " + recorrido + " - drones: " + escuadron.cantidadDeEscuadrones() + " - contador: " + escuadron.getContador());
+		if(recorrido) {
 			sistemaPuntaje.sumarPuntos(300);
 			nivel = incrementarNivel();
 			aumentarVelocidad(15);
@@ -91,9 +96,11 @@ public class Juego {
 	public int incrementarNivel() {
 		return nivel + 1;
 	}
-	
+
 	public void restarVida() {
-		vidas = vidas - 1; gameOver();
+		vidas = vidas - 1;
+		avion.resetearEnergia();
+		gameOver();
 	}
 	
 	public void aumentarVidas() {
@@ -114,9 +121,17 @@ public class Juego {
 	public void otorgarVidaExtra() {
 		aumentarVidas();
 	}
+
+	private boolean juegoTerminado = false;
+
+	public boolean isJuegoTerminado() {
+		return juegoTerminado;
+	}
+
 	public void gameOver() {
-		if(vidas == 0) {
-			escuadron.gestionarActivos(); // detiene nuevos spawns
+		if(vidas <= 0) {
+			vidas = 0;
+			juegoTerminado = true;
 			System.out.println("Game Over");
 		}
 	}

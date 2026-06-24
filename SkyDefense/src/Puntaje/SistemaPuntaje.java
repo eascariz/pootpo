@@ -3,6 +3,17 @@ package Puntaje;
 public class SistemaPuntaje {
 	private int puntaje;
 	private int umbral = 1000;
+	private static int highScore = 0;
+
+	public static int getHighScore() {
+		return highScore;
+	}
+
+	public void actualizarHighScore() {
+		if(puntaje > highScore) {
+			highScore = puntaje;
+		}
+	}
 
 	public SistemaPuntaje() {
 		this.puntaje = 0;

@@ -1,25 +1,50 @@
 package InterfazGrafica;
 
-import Avion.Avion;
-import Comun.Direccion;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 
-public class MenuInicio {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+public class MenuInicio extends JFrame {
+
+	public MenuInicio() {
+		setTitle("Sky Defense");
+		setSize(400, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+
+		JLabel titulo = new JLabel("SKY DEFENSE", SwingConstants.CENTER);
+		titulo.setFont(new Font("Arial", Font.BOLD, 36));
+
+		JButton btnIniciar = new JButton("Iniciar");
+		JButton btnSalir = new JButton("Salir");
+
+		btnIniciar.addActionListener(e -> {
+			dispose();
+			Pantalla.iniciar();
+		});
+
+		btnSalir.addActionListener(e -> {
+			System.exit(0);
+		});
+
+		JPanel panelBotones = new JPanel();
+		panelBotones.setLayout(new GridLayout(2, 1, 10, 10));
+		panelBotones.add(btnIniciar);
+		panelBotones.add(btnSalir);
+
+		add(titulo, BorderLayout.CENTER);
+		add(panelBotones, BorderLayout.SOUTH);
+
+		setVisible(true);
+	}
 
 	public static void main(String[] args) {
-		Avion avion = new Avion(3, 2000, 2);
-		System.out.println("AVION");
-		System.out.println(avion.toString());
-		System.out.println("giro a la izquierda");
-		avion.actualizarPosicion(Direccion.IZQUIERDA);
-		System.out.println(avion.toString());
-		System.out.println("giro a la derecha");
-		avion.actualizarPosicion(Direccion.DERECHA);
-		System.out.println(avion.toString());
-		System.out.println("subio");
-		avion.actualizarPosicion(Direccion.ARRIBA);
-		System.out.println(avion.toString());
-		System.out.println("bajo");
-		avion.actualizarPosicion(Direccion.ABAJO);
-		System.out.println(avion.toString());
+		new MenuInicio();
 	}
 }
