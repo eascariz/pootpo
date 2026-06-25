@@ -29,7 +29,10 @@ public class Dron extends EntidadVoladora {
 	}
 
 	public void aumentarFrecuencia(int porc) {
-		frecuenciaDisparo = frecuenciaDisparo + (porc * frecuenciaDisparo / 100);
+		frecuenciaDisparo = frecuenciaDisparo - (porc * frecuenciaDisparo / 100);
+		if(frecuenciaDisparo < 1) {
+	        frecuenciaDisparo = 1;
+	    }
 	}
 
 	public void aumentarVelocidad(int porc) {
