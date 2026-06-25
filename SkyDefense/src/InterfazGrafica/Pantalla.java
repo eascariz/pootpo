@@ -61,6 +61,44 @@ public class Pantalla {
 
 		PanelJuego panelJuego = new PanelJuego(avion, escuadron);
 
+		// teclas de control
+		javax.swing.InputMap inputMap = panelJuego.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+		javax.swing.ActionMap actionMap = panelJuego.getActionMap();
+
+		inputMap.put(javax.swing.KeyStroke.getKeyStroke("UP"), "arriba");
+		inputMap.put(javax.swing.KeyStroke.getKeyStroke("DOWN"), "abajo");
+		inputMap.put(javax.swing.KeyStroke.getKeyStroke("LEFT"), "izquierda");
+		inputMap.put(javax.swing.KeyStroke.getKeyStroke("RIGHT"), "derecha");
+
+		actionMap.put("arriba", new javax.swing.AbstractAction() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				juego.desplazar(Direccion.ARRIBA);
+				lblPosY.setText(String.valueOf(juego.getAvion().obtenerPosicion()[1]));
+				panelJuego.repaint();
+			}
+		});
+		actionMap.put("abajo", new javax.swing.AbstractAction() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				juego.desplazar(Direccion.ABAJO);
+				lblPosY.setText(String.valueOf(juego.getAvion().obtenerPosicion()[1]));
+				panelJuego.repaint();
+			}
+		});
+		actionMap.put("izquierda", new javax.swing.AbstractAction() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				juego.desplazar(Direccion.IZQUIERDA);
+				lblPosX.setText(String.valueOf(juego.getAvion().obtenerPosicion()[0]));
+				panelJuego.repaint();
+			}
+		});
+		actionMap.put("derecha", new javax.swing.AbstractAction() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				juego.desplazar(Direccion.DERECHA);
+				lblPosX.setText(String.valueOf(juego.getAvion().obtenerPosicion()[0]));
+				panelJuego.repaint();
+			}
+		});
+
 		JPanel panelControl = new JPanel();
 		panelControl.setLayout(new GridLayout(4, 3));
 		JButton izq = new JButton();
