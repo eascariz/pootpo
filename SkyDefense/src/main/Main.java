@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Avion avion = new Avion(300, 1500, 2);
-		Escuadron escuadron = new Escuadron(800);
+		Escuadron escuadron = new Escuadron(800,5);
 		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
 		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
 

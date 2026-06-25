@@ -18,7 +18,7 @@ public class Pantalla {
 
 	public static void iniciar() {
 		Avion avion = new Avion(300, 1500, 10);
-		Escuadron escuadron = new Escuadron(100);
+		Escuadron escuadron = new Escuadron(100,5);
 		SistemaPuntaje sistemaPuntaje = new SistemaPuntaje();
 		Juego juego = new Juego(1, 3, avion, escuadron, sistemaPuntaje);
 

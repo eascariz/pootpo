@@ -9,6 +9,7 @@ public class Escuadron {
 	private List<Misil> misiles = new ArrayList<>();
 	private int velocidad;
 	private int contador = 0;
+	private int frecuenciaDisparo;
 
 	public List<Dron> getDrones() {
 		return drones;
@@ -22,9 +23,10 @@ public class Escuadron {
 		return drones.get(indice);
 	}
 
-	public Escuadron(int velocidad) {
+	public Escuadron(int velocidad, int frecuenciaDisparo) {
 		super();
 		this.velocidad = velocidad;
+		this.frecuenciaDisparo = frecuenciaDisparo;
 	}
 
 	public void setVelocidad(int velocidad) {
@@ -42,7 +44,7 @@ public class Escuadron {
 				int cantidad = random.nextInt(maximoPosible) + 1;
 
 				for (int i = 0; i < cantidad; i++) {
-					Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), velocidad);
+					Dron nuevoDron = new Dron(spawn(), random.nextInt(1000,5000), frecuenciaDisparo, velocidad);
 					drones.add(nuevoDron);
 					contador++;
 				}
@@ -71,8 +73,10 @@ public class Escuadron {
 
 	public void aumentarVelocidad(int porc) {
 		velocidad = velocidad + (porc * velocidad / 100);
+		frecuenciaDisparo = frecuenciaDisparo + (porc * frecuenciaDisparo / 100);
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).aumentarVelocidad(porc);
+			drones.get(i).aumentarFrecuencia(porc);
 		}
 		for (int i = 0; i < misiles.size(); i++) {
 			misiles.get(i).aumentarVelocidad(porc);
@@ -87,7 +91,10 @@ public class Escuadron {
 		for (int i = 0; i < drones.size(); i++) {
 			drones.get(i).patronDron();
 			if(drones.get(i).debeDisparar()) {
-				misiles.add(drones.get(i).lanzarMisil());
+				Misil misil = drones.get(i).lanzarMisil();
+			    if(misil != null) {
+			        misiles.add(misil);
+			    }
 			}
 		}
 	}

@@ -8,11 +8,11 @@ public class Dron extends EntidadVoladora {
 	private int frecuenciaDisparo;
 	private int contadorDisparo;
 
-	public Dron(int posicionX, int posicionY, int velocidad) {
+	public Dron(int posicionX, int posicionY, int frecuenciaDisparo, int velocidad) {
 		super(posicionX, posicionY);
 		this.velocidad = velocidad;
 		this.posInicioX = posicionX;
-		this.frecuenciaDisparo = 5;
+		this.frecuenciaDisparo = frecuenciaDisparo;
 		this.contadorDisparo = 0;
 	}
 
@@ -63,6 +63,9 @@ public class Dron extends EntidadVoladora {
 	}
 
 	public Misil lanzarMisil() {
-		return new Misil(velocidad, posicionX, posicionY);
+		if(posicionY > 1200) {
+			return new Misil(velocidad, posicionX, posicionY);
+		}
+		return null;
 	}
 }

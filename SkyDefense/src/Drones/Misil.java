@@ -14,7 +14,7 @@ public class Misil extends EntidadVoladora {
 		super(posicionX, posicionY);
 		Random random = new Random();
 		// TODO Auto-generated constructor stub
-		this.altitudDeDetonacion = random.nextInt(1200,4500);
+		this.altitudDeDetonacion = random.nextInt(1200,posicionY);
 		this.velocidadDeCaida = velocidadDeCaida;
 	}
 
