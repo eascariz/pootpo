@@ -63,7 +63,9 @@ public class Juego {
 
 	public void calcularDanio(Explosion explosion) {
 		int distancia = explosion.calcularDistancia(avion);
-		System.out.println("Distancia: " + distancia);
+		//debug distancia
+		//System.out.println("Distancia: " + distancia);
+
 		if(distancia > 150) {
 			sistemaPuntaje.sumarPuntos(40);
 		}
@@ -83,7 +85,9 @@ public class Juego {
 
 	public void pasarNivel() {
 		boolean recorrido = escuadron.verificarRecorrido();
-		System.out.println("verificarRecorrido: " + recorrido + " - drones: " + escuadron.cantidadDeEscuadrones() + " - contador: " + escuadron.getContador());
+		//vista de drone y verificacion de nivel
+		//System.out.println("verificarRecorrido: " + recorrido + " - drones: " + escuadron.cantidadDeEscuadrones() + " - contador: " + escuadron.getContador());
+
 		if(recorrido) {
 			sistemaPuntaje.sumarPuntos(300);
 			nivel = incrementarNivel();
@@ -132,7 +136,7 @@ public class Juego {
 		if(vidas <= 0) {
 			vidas = 0;
 			juegoTerminado = true;
-			System.out.println("Game Over");
+			//System.out.println("Game Over");
 		}
 	}
 
