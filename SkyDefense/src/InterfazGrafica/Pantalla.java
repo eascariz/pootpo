@@ -84,7 +84,7 @@ public class Pantalla {
 		panelControl.add(abajo);
 		abajo.addActionListener(new Movimiento(lblPosY, juego, Direccion.ABAJO));
 		panelControl.add(new JLabel());
-
+		/*
 		JButton testEnergia = new JButton("Test energía");
 		testEnergia.addActionListener(e -> {
 			avion.restarEnergia(40);
@@ -92,7 +92,7 @@ public class Pantalla {
 			lblEnergia.setText(String.valueOf(avion.getEnergia()));
 			lblVidas.setText(String.valueOf(juego.getVidas()));
 		});
-
+		
 		JButton testVida = new JButton("Test vida");
 		testVida.addActionListener(e -> {
 			juego.restarVida();
@@ -102,7 +102,7 @@ public class Pantalla {
 		panelControl.add(testEnergia);
 		panelControl.add(testVida);
 		panelControl.add(new JLabel());
-
+		*/
 		JFrame pantalla = new JFrame("SkyDefence");
 		pantalla.add(panelContenedorInfo, BorderLayout.NORTH);
 		pantalla.add(panelJuego, BorderLayout.CENTER);
